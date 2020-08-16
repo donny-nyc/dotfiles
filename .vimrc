@@ -1,6 +1,10 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+
+set exrc " allows loading local rc files
+set secure " no :autocmd, shell or writes in local .vimrc
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -24,19 +28,31 @@ if executable('ag')
 endif
 
 let g:ale_linters = {
-			\		'c': ['clang'],
-			\		'c++': ['clang'],
       \   'ruby': ['rubocop'],
       \   'javascript': ['eslint'],
       \}
-
+"let g:ale_linters = {
+"			\		'c': ['clang'],
+"			\		'c++': ['clang'],
+"      \   'ruby': ['rubocop'],
+"      \   'javascript': ['eslint'],
+"      \}
 let g:ale_fixers = {
-		  \		 'c': ['clang-tidy'],
-		  \		 'c++': ['clang-tidy'],
       \    'ruby': ['rubocop'],
-      \}
+      \    'javascript': ['eslint'],
+			\}
+
+"let g:ale_fixers = {
+"		  \		 'c': ['clangtidy'],
+"		  \		 'c++': ['clangtidy'],
+"      \    'ruby': ['rubocop'],
+"      \    'javascript': ['eslint'],
+"      \}
 
 let g:ale_fix_on_save = 1
+
+let g:ycm_global_ycm_extra_conf = '$HOME/.vim/ycm_extra_conf/ycm_extra_conf.py'
+let g:ycm_autoclose_preview_window_after_completion = 1
 
 set tabstop=2 shiftwidth=2
 set incsearch ignorecase hlsearch
@@ -53,10 +69,15 @@ set magic
 
 syntax enable
 
-colorscheme default
+colorscheme pablo
 
 set path=$PWD/**
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+" nnoremap <C-ALT-d> :.!date -I<CR>
+" nnoremap <C-S-d> :.!date<CR>
+
+set clipboard=unnamed " use system clipboard
